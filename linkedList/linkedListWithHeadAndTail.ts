@@ -9,7 +9,7 @@ interface ILinkedList<T> {
 
 class ApexWithTail<T> {
   public data: T;
-  public next: Apex<T> | null;
+  public next: ApexWithTail<T> | null;
 
   constructor(data: T) {
     this.data = data;
@@ -26,8 +26,8 @@ class ApexWithTail<T> {
 }
 
 class LinkedListWithTail<T> implements ILinkedList<T> {
-  private head: Apex<T> | null;
-  private tail: Apex<T> | null;
+  private head: ApexWithTail<T> | null;
+  private tail: ApexWithTail<T> | null;
   private size: number;
 
   constructor() {
@@ -45,7 +45,7 @@ class LinkedListWithTail<T> implements ILinkedList<T> {
   }
 
   prepend(value: T): void {
-    const node = new Apex(value);
+    const node = new ApexWithTail(value);
     if (this.head === null) {
       this.head = node;
       this.tail = node;
@@ -58,7 +58,7 @@ class LinkedListWithTail<T> implements ILinkedList<T> {
   }
 
   append(value: T): void {
-    const node = new Apex(value);
+    const node = new ApexWithTail(value);
     if (this.isEmpty()) {
       this.head = node;
       this.tail = node;
